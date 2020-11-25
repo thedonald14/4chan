@@ -25,6 +25,9 @@ class Polapi():
         url = "https://a.4cdn.org/pol/archive.json"
         response = json.loads(requests.get(url).text)[0:numtoreturn]
         threads = [post for post in response]
+        
+        return threads
+
     
     def getpolpost(self,threadid):
         """Get a Single post from 4Chan by Thread ID"""
