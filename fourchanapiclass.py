@@ -9,7 +9,9 @@ class Polapi():
     """This Class has methods to interact with the 4chan API and its EndPoints"""
 
     def get4chanboards(self,boardid=None):
-        """This function returns a single board or a list of all 4Chan Boards"""
+        """This function returns a single board or a list of all 4Chan Boards
+           response = Polapi().get4chanboards()
+        """
 
         url = "https://a.4cdn.org/boards.json"
         df = pd.DataFrame(json.loads(requests.get(url).text)['boards'])
@@ -20,7 +22,9 @@ class Polapi():
         return df
 
     def getpolarchive(self,numtoreturn):
-        """Get current /POL/ Archive numtoreturn limits the return"""
+        """Get current /POL/ Archive numtoreturn limits the return
+           response = Polapi().getpolarchive(numtoreturn=100) 
+        """
     
         url = "https://a.4cdn.org/pol/archive.json"
         response = json.loads(requests.get(url).text)[0:numtoreturn]
@@ -30,7 +34,9 @@ class Polapi():
 
     
     def getpolpost(self,threadid):
-        """Get a Single post from 4Chan by Thread ID"""
+        """Get a Single post from 4Chan by Thread ID
+           response = Polapi().getpolpost(292433191)
+        """
 
         url = f'https://a.4cdn.org/pol/thread/{threadid}.json'
         response = json.loads(requests.get(url).text)
@@ -52,7 +58,9 @@ class Polapi():
     
     
     def returnlinks(self,numtoreturn):
-        """This Function crawls all archived /POL/ Posts and returns links"""
+        """This Function crawls all archived /POL/ Posts and returns links
+           response = Polapi().returnlinks(100)
+        """
 
         extractor = URLExtract()
         archives = self.getpolarchive(numtoreturn)
@@ -78,7 +86,9 @@ class Polapi():
     
     
     def returnlargedf(self,numtoreturn):
-        """Return a DataFrame with many Posts in it"""
+        """Return a DataFrame with many Posts in it
+           response = Polapi().returnlargedf(10) 
+        """
         
         archives = self.getpolarchive(numtoreturn)
 
